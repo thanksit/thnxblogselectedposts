@@ -36,7 +36,8 @@ class ThnxBlogSelectedPosts extends Module implements WidgetInterface
         $this->ps_versions_compliancy = array('min' => '1.7', 'max' => _PS_VERSION_);
     }
     // For installation service
-    public function install() {
+    public function install()
+    {
         if (!parent::install()
             || !$this->registerHook('displayheader')
             || !$this->registerHook('displayHomeBottom')
@@ -57,9 +58,9 @@ class ThnxBlogSelectedPosts extends Module implements WidgetInterface
             return true;
         }
     }
-    public function xpertsampledata($demo = NULL)
+    public function xpertsampledata($demo = null)
     {
-        if (($demo == NULL) || (empty($demo))) {
+        if (($demo == null) || (empty($demo))) {
             $demo = "demo_1";
         }
 
@@ -305,8 +306,9 @@ class ThnxBlogSelectedPosts extends Module implements WidgetInterface
     }
     public static function isEmptyFileContet($path = null)
     {
-        if ($path == null)
+        if ($path == null) {
             return false;
+        }
         if (file_exists($path)) {
             $content = Tools::file_get_contents($path);
             if (empty($content)) {
@@ -338,12 +340,12 @@ class ThnxBlogSelectedPosts extends Module implements WidgetInterface
                         if (isset($css_file['load_theme']) && ($css_file['load_theme'] == true)) {
                             $theme_file_src = 'themes/'.$theme_name.'/assets/css/'.$css_file['src'];
                             if (self::isEmptyFileContet($root_path.$theme_file_src)) {
-                                $this->context->controller->registerStylesheet($css_file['key'], $theme_file_src , ['media' => $media, 'priority' => $priority]);
+                                $this->context->controller->registerStylesheet($css_file['key'], $theme_file_src, ['media' => $media, 'priority' => $priority]);
                             }
                         } else {
                             $module_file_src = 'modules/'.$this->name.'/css/'.$css_file['src'];
                             if (self::isEmptyFileContet($root_path.$module_file_src)) {
-                                $this->context->controller->registerStylesheet($css_file['key'], $module_file_src , ['media' => $media, 'priority' => $priority]);
+                                $this->context->controller->registerStylesheet($css_file['key'], $module_file_src, ['media' => $media, 'priority' => $priority]);
                             }
                         }
                     }
@@ -372,12 +374,12 @@ class ThnxBlogSelectedPosts extends Module implements WidgetInterface
                         if (isset($js_file['load_theme']) && ($js_file['load_theme'] == true)) {
                             $theme_file_src = 'themes/'.$theme_name.'/assets/js/'.$js_file['src'];
                             if (self::isEmptyFileContet($root_path.$theme_file_src)) {
-                                $this->context->controller->registerJavascript($js_file['key'], $theme_file_src , ['position' => $position, 'priority' => $priority]);
+                                $this->context->controller->registerJavascript($js_file['key'], $theme_file_src, ['position' => $position, 'priority' => $priority]);
                             }
                         } else {
                             $module_file_src = 'modules/'.$this->name.'/js/'.$js_file['src'];
                             if (self::isEmptyFileContet($root_path.$module_file_src)) {
-                                $this->context->controller->registerJavascript($js_file['key'], $module_file_src , ['position' => $position, 'priority' => $priority]);
+                                $this->context->controller->registerJavascript($js_file['key'], $module_file_src, ['position' => $position, 'priority' => $priority]);
                             }
                         }
                     }
@@ -493,7 +495,7 @@ class ThnxBlogSelectedPosts extends Module implements WidgetInterface
         $thnxblogposts = array();
         if (Module::isInstalled('thnxblog') && Module::isEnabled('thnxblog')) {
             if (isset($thnxbsp_item_prd) && !empty($thnxbsp_item_prd)) {
-                $thnxbsp_item_prd_arr = @explode(",",$thnxbsp_item_prd);
+                $thnxbsp_item_prd_arr = @explode(",", $thnxbsp_item_prd);
                 if (isset($thnxbsp_item_prd_arr) && !empty($thnxbsp_item_prd_arr)) {
                     $i = 0;
                     foreach ($thnxbsp_item_prd_arr as $thnxbspvalue) {
@@ -520,11 +522,11 @@ class ThnxBlogSelectedPosts extends Module implements WidgetInterface
     public function renderWidget($hookName = null, array $configuration = [])
     {
         if (Module::isInstalled('thnxblog') && Module::isEnabled('thnxblog')) {
-            $this->smarty->assign($this->getWidgetVariables($hookName,$configuration));
+            $this->smarty->assign($this->getWidgetVariables($hookName, $configuration));
             return $this->fetch('module:'.$this->name.'/views/templates/front/'.$this->name.'.tpl');
         } else {
             return false;
-        }   
+        }
     }
     public function getWidgetVariables($hookName = null, array $configuration = [])
     {
@@ -539,7 +541,7 @@ class ThnxBlogSelectedPosts extends Module implements WidgetInterface
             $thnxblogposts = array();
             if (Module::isInstalled('thnxblog') && Module::isEnabled('thnxblog')) {
                 if (isset($thnxbsp_item_prd) && !empty($thnxbsp_item_prd)) {
-                    $thnxbsp_item_prd_arr = @explode(",",$thnxbsp_item_prd);
+                    $thnxbsp_item_prd_arr = @explode(",", $thnxbsp_item_prd);
                     if (isset($thnxbsp_item_prd_arr) && !empty($thnxbsp_item_prd_arr)) {
                         $i = 0;
                         foreach ($thnxbsp_item_prd_arr as $thnxbspvalue) {
